@@ -175,6 +175,58 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
 /* ── Bottom safe area ── */
 .bottom-safe { height: env(safe-area-inset-bottom, 24px); }
 
+  /* Hotel cards */
+  .hotel-card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.1);margin:12px 16px;overflow:hidden;}
+  .hotel-card-head{padding:11px 14px;font-size:14px;font-weight:800;color:#fff;background:linear-gradient(135deg,#553c9a,#805ad5);}
+  .hotel-card-body{padding:10px 14px;font-size:13px;line-height:1.9;}
+  .hotel-row{padding:2px 0;color:#4a5568;}
+  .hotel-feats{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;}
+  .feat{background:#ebf4ff;color:#2b6cb0;font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;}
+  .hotel-note{font-size:12px;color:#718096;padding-top:6px;border-top:1px dashed #e2e8f0;margin-top:4px;}
+  /* Sub-tabs */
+  .sub-tab-bar {
+    display: flex; overflow-x: auto; background: #f7f8fc;
+    border-bottom: 2px solid #e2e8f0;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .sub-tab-bar::-webkit-scrollbar { display: none; }
+  .sub-tab {
+    flex: 0 0 auto; padding: 9px 14px; font-size: 13px; font-weight: 600;
+    border: none; background: transparent; color: #718096; cursor: pointer;
+    border-bottom: 3px solid transparent; white-space: nowrap;
+    touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);
+    outline: none; transition: color .2s, border-color .2s;
+  }
+  .sub-tab.active { color: #553c9a; border-bottom-color: #553c9a; }
+  .sub-panel { display: none; }
+  .sub-panel.active { display: block; }
+  /* --- Checklist & Flight --- */
+  .info-card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.1);margin:12px 16px;overflow:hidden;}
+  .info-card-head{padding:11px 14px;font-size:14px;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px;}
+  .flight-head{background:linear-gradient(135deg,#1a365d,#2b6cb0);}
+  .shuttle-head{background:linear-gradient(135deg,#276749,#38a169);}
+  .info-card-body{padding:10px 14px;font-size:13px;line-height:1.7;}
+  .flight-row{display:flex;gap:8px;padding:7px 0;border-bottom:1px solid #e2e8f0;}
+  .flight-row:last-child{border-bottom:none;}
+  .fl{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;flex-shrink:0;margin-top:2px;}
+  .fl-go{background:#ebf8ff;color:#2b6cb0;}
+  .fl-back{background:#fff5f5;color:#c53030;}
+  .sc{margin:8px 0;padding:10px;background:#f7fafc;border-radius:8px;border-left:3px solid #38a169;}
+  .sc-name{font-weight:800;font-size:14px;color:#276749;margin-bottom:4px;}
+  .sc-row{font-size:12px;color:#718096;line-height:1.8;}
+  .sc-div{font-size:11px;font-weight:700;color:#a0aec0;margin:4px 0 2px;border-top:1px dashed #e2e8f0;padding-top:4px;}
+  .cl-sec{margin:10px 16px 2px;}
+  .cl-title{font-size:13px;font-weight:700;color:#2c5282;padding:8px 0 5px;border-bottom:2px solid #2c5282;margin-bottom:3px;}
+  .cl-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #e2e8f0;}
+  .cl-item:last-child{border-bottom:none;}
+  .cl-item input[type=checkbox]{width:20px;height:20px;flex-shrink:0;margin-top:1px;accent-color:#2c5282;cursor:pointer;}
+  .cl-item label{font-size:14px;cursor:pointer;line-height:1.5;flex:1;}
+  .cl-item label.done{text-decoration:line-through;color:#a0aec0;}
+  .cl-badge{font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;background:#fef9c3;color:#92400e;vertical-align:middle;margin-left:5px;}
+  .prog-wrap{margin:4px 16px 8px;}
+  .prog-top{font-size:12px;color:#718096;margin-bottom:4px;display:flex;justify-content:space-between;}
+  .prog-bar{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden;}
+  .prog-fill{height:100%;background:#48bb78;border-radius:4px;transition:width .4s;width:0%;}
   /* Photo strip */
   .photo-strip {
     display: flex; gap: 8px; overflow-x: auto;
@@ -210,19 +262,230 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
 </header>
 
 <div class="tab-bar" id="tabBar">
-  <button class="tab-btn active" onclick="showDay(0)">Day1<br><span style="font-size:10px;font-weight:400">大阪</span></button>
-  <button class="tab-btn" onclick="showDay(1)">Day2<br><span style="font-size:10px;font-weight:400">近江八幡</span></button>
-  <button class="tab-btn" onclick="showDay(2)">Day3<br><span style="font-size:10px;font-weight:400">移動</span></button>
-  <button class="tab-btn" onclick="showDay(3)">Day4<br><span style="font-size:10px;font-weight:400">砂丘</span></button>
-  <button class="tab-btn" onclick="showDay(4)">Day5<br><span style="font-size:10px;font-weight:400">倉吉</span></button>
-  <button class="tab-btn" onclick="showDay(5)">Day6<br><span style="font-size:10px;font-weight:400">倉敷</span></button>
-  <button class="tab-btn" onclick="showDay(6)">Day7<br><span style="font-size:10px;font-weight:400">回台</span></button>
+  <button class="tab-btn active" onclick="showDay(0)">✅ 清單<br><span style="font-size:10px;font-weight:400">航班・接送</span></button>
+  <button class="tab-btn" onclick="showDay(1)">Day1<br><span style="font-size:10px;font-weight:400">大阪</span></button>
+  <button class="tab-btn" onclick="showDay(2)">Day2<br><span style="font-size:10px;font-weight:400">近江八幡</span></button>
+  <button class="tab-btn" onclick="showDay(3)">Day3<br><span style="font-size:10px;font-weight:400">→鳥取</span></button>
+  <button class="tab-btn" onclick="showDay(4)">Day4<br><span style="font-size:10px;font-weight:400">鳥取砂丘</span></button>
+  <button class="tab-btn" onclick="showDay(5)">Day5<br><span style="font-size:10px;font-weight:400">三朝温泉</span></button>
+  <button class="tab-btn" onclick="showDay(6)">Day6<br><span style="font-size:10px;font-weight:400">倉敷</span></button>
+  <button class="tab-btn" onclick="showDay(7)">Day7<br><span style="font-size:10px;font-weight:400">回台</span></button>
 </div>
 
-<!-- ════════════════════════════════════════
-     DAY 1  大阪
-════════════════════════════════════════ -->
-<div class="day-panel active" id="day0">
+<div class="day-panel active" id="day-checklist">
+  <div class="day-hero">
+    <div class="day-hero-bg" style="background:linear-gradient(160deg,#1a365d 0%,#2b6cb0 60%,#1a365d 100%)"></div>
+    <div class="day-hero-content">
+      <h2>📋 出發前確認清單</h2>
+      <p>航班資訊・接送安排・行李打包清單</p>
+    </div>
+  </div>
+
+  <!-- Sub-tabs -->
+  <div class="sub-tab-bar" id="subTabBar">
+    <button class="sub-tab active" onclick="showSub(0)">✈️ 航班</button>
+    <button class="sub-tab" onclick="showSub(1)">🚐 接送</button>
+    <button class="sub-tab" onclick="showSub(2)">🛍 機場購物</button>
+    <button class="sub-tab" onclick="showSub(3)">✅ 行李清單</button>
+  </div>
+
+  <!-- Sub 0: 航班 -->
+  <div class="sub-panel active" id="sub0">
+    <div class="info-card" style="margin-top:12px">
+      <div class="info-card-head flight-head">✈️ 航班資訊</div>
+      <div class="info-card-body">
+        <div class="flight-row">
+          <span class="fl fl-go">去程</span>
+          <div><strong>CI152 中華航空</strong><br>
+            📅 2025年5月30日（週五）<br>
+            🛫 桃園國際機場 <strong>第二航廈</strong> → 大阪關西空港<br>
+            🚐 機場接送：06:00 出發
+          </div>
+        </div>
+        <div class="flight-row">
+          <span class="fl fl-back">回程</span>
+          <div><strong>IT725 台灣虎航</strong><br>
+            📅 2025年6月5日（週四）<br>
+            🛬 大阪關西空港 → 桃園國際機場 <strong>第一航廈</strong><br>
+            🚐 機場接送：20:30 出發
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="height:16px"></div>
+  </div>
+
+  <!-- Sub 1: 接送 -->
+  <div class="sub-panel" id="sub1">
+    <div class="info-card" style="margin-top:12px">
+      <div class="info-card-head shuttle-head">🚐 接送安排</div>
+      <div class="info-card-body">
+        <div class="sc">
+          <div class="sc-name">鍾陞儒　📞 0988-196-245</div>
+          <div class="sc-div">✈ 去程</div>
+          <div class="sc-row">
+            📅 5/30 06:00 出發 ｜ 航班：CI152<br>
+            🏠 桃園市平鎮區建安路112巷125弄10號<br>
+            ↓ 桃機 <strong>第二航廈</strong><br>
+            👥 2大1小 ｜ 🧳 29吋×1・26吋×1・嬰兒推車×1
+          </div>
+          <div class="sc-div">🏠 回程</div>
+          <div class="sc-row">
+            📅 6/5 20:30 出發 ｜ 航班：IT725<br>
+            桃機 <strong>第一航廈</strong> ↓<br>
+            🏠 桃園市平鎮區建安路112巷125弄10號<br>
+            👥 2大 ｜ 🧳 29吋×1・26吋×1・嬰兒推車×1
+          </div>
+        </div>
+        <div class="sc">
+          <div class="sc-name">陳芊穎　📞 0920-855-300</div>
+          <div class="sc-div">✈ 去程</div>
+          <div class="sc-row">
+            📅 5/30 06:00 出發 ｜ 航班：CI152<br>
+            🏠 新北市土城區福仁街12號1樓<br>
+            ↓ 桃機 <strong>第二航廈</strong><br>
+            👥 2大1小 ｜ 🧳 29吋×2
+          </div>
+          <div class="sc-div">🏠 回程</div>
+          <div class="sc-row">
+            📅 6/5 20:30 出發 ｜ 航班：IT725<br>
+            桃機 <strong>第一航廈</strong> ↓<br>
+            🏠 新北市土城區福仁街12號1樓<br>
+            👥 2大2小 ｜ 🧳 29吋×2
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="height:16px"></div>
+  </div>
+
+  <!-- Sub 2: 機場購物 -->
+  <div class="sub-panel" id="sub2">
+
+<div style="padding:10px 16px 0">
+
+  <div style="background:#fef9c3;border:1px solid #f6e05e;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:#744210;">
+    💡 <strong>購買建議：</strong>免稅品在<strong>出境安全檢查後</strong>購買，可直接帶上飛機（店家提供密封安全袋）。回程在日本機場購買更划算！
+  </div>
+
+  <div style="background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.1);overflow:hidden;margin-bottom:12px;">
+    <div style="background:linear-gradient(135deg,#553c9a,#805ad5);color:#fff;padding:11px 14px;font-size:14px;font-weight:800;">
+      🛍 桃園機場第二航廈（去程・CI152）
+    </div>
+    <div style="padding:10px 14px;font-size:13px;">
+      <div style="background:#f7f3ff;border-left:3px solid #805ad5;border-radius:6px;padding:8px 10px;margin-bottom:10px;">
+        📍 位置：<strong>出境後4F 中央免稅購物區（B-Gate 前方走廊）</strong><br>
+        🏪 主要業者：<strong>昇恆昌 Everrich</strong> 香水化妝品區<br>
+        ⏰ 建議預留 20–30 分鐘逛街
+      </div>
+
+      <div style="font-weight:700;color:#553c9a;margin-bottom:6px;font-size:13px;">👩 女性香水</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <tr style="background:#f7f3ff;"><td style="padding:5px 6px;font-weight:700;">品牌</td><td style="padding:5px 6px;font-weight:700;">推薦品項</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:5px 6px;font-weight:600;">Chanel 香奈兒</td><td style="padding:5px 6px;color:#718096;">No.5、Chance、Coco Mademoiselle</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:5px 6px;font-weight:600;">Dior 迪奧</td><td style="padding:5px 6px;color:#718096;">J'adore、Miss Dior、Poison Girl</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:5px 6px;font-weight:600;">YSL 聖羅蘭</td><td style="padding:5px 6px;color:#718096;">Black Opium、Mon Paris、Libre</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:5px 6px;font-weight:600;">Lancôme 蘭蔻</td><td style="padding:5px 6px;color:#718096;">La Vie Est Belle、Idôle</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:5px 6px;font-weight:600;">Jo Malone</td><td style="padding:5px 6px;color:#718096;">Wood Sage & Sea Salt、Peony & Blush Suede、禮盒組</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:5px 6px;font-weight:600;">Hermès 愛馬仕</td><td style="padding:5px 6px;color:#718096;">Twilly、Un Jardin Sur Le Nil</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:5px 6px;font-weight:600;">Guerlain 嬌蘭</td><td style="padding:5px 6px;color:#718096;">Mon Guerlain、Aqua Allegoria</td></tr>
+        <tr><td style="padding:5px 6px;font-weight:600;">Gucci</td><td style="padding:5px 6px;color:#718096;">Bloom、Flora Gorgeous Gardenia</td></tr>
+      </table>
+
+      <div style="font-weight:700;color:#553c9a;margin:10px 0 6px;font-size:13px;">👨 男性香水</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <tr style="background:#f7f3ff;"><td style="padding:5px 6px;font-weight:700;">品牌</td><td style="padding:5px 6px;font-weight:700;">推薦品項</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:5px 6px;font-weight:600;">Dior 迪奧</td><td style="padding:5px 6px;color:#718096;">Sauvage（最暢銷）</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:5px 6px;font-weight:600;">Chanel 香奈兒</td><td style="padding:5px 6px;color:#718096;">Bleu de Chanel、Allure Homme Sport</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:5px 6px;font-weight:600;">Armani 亞曼尼</td><td style="padding:5px 6px;color:#718096;">Acqua di Giò、Si Passione（中性）</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:5px 6px;font-weight:600;">Burberry</td><td style="padding:5px 6px;color:#718096;">Hero、Mr. Burberry</td></tr>
+        <tr><td style="padding:5px 6px;font-weight:600;">Hugo Boss</td><td style="padding:5px 6px;color:#718096;">Boss Bottled、Hugo Man</td></tr>
+      </table>
+
+      <div style="margin-top:10px;padding:8px 10px;background:#f0fff4;border-radius:8px;font-size:12px;color:#276749;">
+        ✅ <strong>免稅 vs 台灣市售</strong>：免稅價通常約 <strong>8–9折</strong>，搭配護照優惠或會員折扣最優惠。建議先查好台灣市價再比較！
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.1);overflow:hidden;margin-bottom:12px;">
+    <div style="background:linear-gradient(135deg,#744210,#b7791f);color:#fff;padding:11px 14px;font-size:14px;font-weight:800;">
+      ✈️ 日本・關西空港（回程・IT725）
+    </div>
+    <div style="padding:10px 14px;font-size:13px;">
+      <div style="background:#fffbeb;border-left:3px solid #d69e2e;border-radius:6px;padding:8px 10px;margin-bottom:8px;">
+        📍 位置：<strong>出境後 2F 免稅購物區（大型商場形式）</strong><br>
+        🏪 業者：<strong>Japan Duty Free</strong> / <strong>ANA FESTA</strong> / <strong>JAL PLAZA</strong><br>
+        💡 日本機場香水選擇多、日圓計價，有時比台灣更便宜！
+      </div>
+      <div style="font-size:12px;color:#718096;line-height:1.8;">
+        🇯🇵 關西空港限定品牌：<strong>SHIRO（白）・IPSA・THREE</strong> 等日系香氛<br>
+        💴 用剩日圓在此消費，輕鬆清零！
+      </div>
+    </div>
+  </div>
+
+</div>
+  </div>
+
+  <!-- Sub 3: 行李清單 -->
+  <div class="sub-panel" id="sub3">
+    <div class="prog-wrap" style="padding-top:12px">
+      <div class="prog-top"><span>完成進度</span><span id="ck-count">0 / 32</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="ck-fill"></div></div>
+    </div>
+<div class="cl-sec"><div class="cl-title">🪪 證件・票務</div>
+<div class="cl-item"><input type="checkbox" id="ck0" onchange="ckChange(this)"><label for="ck0">護照（每人確認有效期）<span class="cl-badge">必備</span></label></div>
+<div class="cl-item"><input type="checkbox" id="ck1" onchange="ckChange(this)"><label for="ck1">機票 ／ 訂位確認單<span class="cl-badge">必備</span></label></div>
+<div class="cl-item"><input type="checkbox" id="ck2" onchange="ckChange(this)"><label for="ck2">JR PASS（抵日後換票）<span class="cl-badge">必備</span></label></div>
+<div class="cl-item"><input type="checkbox" id="ck3" onchange="ckChange(this)"><label for="ck3">旅遊保險確認單</label></div>
+<div class="cl-item"><input type="checkbox" id="ck4" onchange="ckChange(this)"><label for="ck4">信用卡（外幣免手續費）</label></div>
+</div>
+<div class="cl-sec"><div class="cl-title">💴 金錢</div>
+<div class="cl-item"><input type="checkbox" id="ck5" onchange="ckChange(this)"><label for="ck5">外幣 — 日圓（足夠每日花費）<span class="cl-badge">必備</span></label></div>
+<div class="cl-item"><input type="checkbox" id="ck6" onchange="ckChange(this)"><label for="ck6">備用台幣</label></div>
+</div>
+<div class="cl-sec"><div class="cl-title">👶 小孩必備</div>
+<div class="cl-item"><input type="checkbox" id="ck7" onchange="ckChange(this)"><label for="ck7">尿布（足量＋備用）<span class="cl-badge">必備</span></label></div>
+<div class="cl-item"><input type="checkbox" id="ck8" onchange="ckChange(this)"><label for="ck8">備用奶粉跟奶瓶 🍼<span class="cl-badge">必備</span></label></div>
+<div class="cl-item"><input type="checkbox" id="ck9" onchange="ckChange(this)"><label for="ck9">安撫巾跟娃娃</label></div>
+<div class="cl-item"><input type="checkbox" id="ck10" onchange="ckChange(this)"><label for="ck10">玩具</label></div>
+<div class="cl-item"><input type="checkbox" id="ck11" onchange="ckChange(this)"><label for="ck11">嬰兒推車（確認可託運或手提）</label></div>
+<div class="cl-item"><input type="checkbox" id="ck12" onchange="ckChange(this)"><label for="ck12">嬰兒食品 ／ 副食品</label></div>
+<div class="cl-item"><input type="checkbox" id="ck13" onchange="ckChange(this)"><label for="ck13">濕紙巾（多帶數包）</label></div>
+<div class="cl-item"><input type="checkbox" id="ck14" onchange="ckChange(this)"><label for="ck14">小孩零食（飛機或車程備用）</label></div>
+</div>
+<div class="cl-sec"><div class="cl-title">👔 衣物・隨身</div>
+<div class="cl-item"><input type="checkbox" id="ck15" onchange="ckChange(this)"><label for="ck15">薄外套（冷氣強，小孩必備）</label></div>
+<div class="cl-item"><input type="checkbox" id="ck16" onchange="ckChange(this)"><label for="ck16">換洗衣物（小孩多帶 2–3 套）</label></div>
+<div class="cl-item"><input type="checkbox" id="ck17" onchange="ckChange(this)"><label for="ck17">拖鞋</label></div>
+<div class="cl-item"><input type="checkbox" id="ck18" onchange="ckChange(this)"><label for="ck18">防曬乳</label></div>
+<div class="cl-item"><input type="checkbox" id="ck19" onchange="ckChange(this)"><label for="ck19">摺疊傘 ／ 輕便雨衣</label></div>
+</div>
+<div class="cl-sec"><div class="cl-title">🧴 盥洗・護理</div>
+<div class="cl-item"><input type="checkbox" id="ck20" onchange="ckChange(this)"><label for="ck20">護髮產品</label></div>
+<div class="cl-item"><input type="checkbox" id="ck21" onchange="ckChange(this)"><label for="ck21">洗漱用品（牙刷・牙膏・洗髮精）</label></div>
+<div class="cl-item"><input type="checkbox" id="ck22" onchange="ckChange(this)"><label for="ck22">常備藥（退燒・止瀉・暈車）<span class="cl-badge">重要</span></label></div>
+<div class="cl-item"><input type="checkbox" id="ck23" onchange="ckChange(this)"><label for="ck23">嬰兒護膚乳液 ／ 痱子粉</label></div>
+</div>
+<div class="cl-sec"><div class="cl-title">🔌 3C・電子</div>
+<div class="cl-item"><input type="checkbox" id="ck24" onchange="ckChange(this)"><label for="ck24">充電線跟充電器（全員確認）</label></div>
+<div class="cl-item"><input type="checkbox" id="ck25" onchange="ckChange(this)"><label for="ck25">行動電源（飛機禁止託運）<span class="cl-badge">重要</span></label></div>
+<div class="cl-item"><input type="checkbox" id="ck26" onchange="ckChange(this)"><label for="ck26">WiFi 分享器 ／ SIM 卡</label></div>
+<div class="cl-item"><input type="checkbox" id="ck27" onchange="ckChange(this)"><label for="ck27">相機 ／ 記憶卡 ／ 備用電池</label></div>
+</div>
+<div class="cl-sec"><div class="cl-title">🧳 行李確認</div>
+<div class="cl-item"><input type="checkbox" id="ck28" onchange="ckChange(this)"><label for="ck28">行李磅秤（避免超重）</label></div>
+<div class="cl-item"><input type="checkbox" id="ck29" onchange="ckChange(this)"><label for="ck29">各組行李尺寸數量核對</label></div>
+<div class="cl-item"><input type="checkbox" id="ck30" onchange="ckChange(this)"><label for="ck30">購物袋 ／ 環保袋（回程用）</label></div>
+<div class="cl-item"><input type="checkbox" id="ck31" onchange="ckChange(this)"><label for="ck31">隨身包＋備用衣物（登機手提）</label></div>
+</div>
+  </div>
+
+  <div style="height:24px"></div>
+</div>
+
+<div class="day-panel" id="day0">
   <div class="day-hero">
     <div class="day-hero-bg" style="background:linear-gradient(160deg,#1a0533 0%,#3D1A78 55%,#1B3A5C 100%)"></div>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Dotonbori_at_Night.jpg/640px-Dotonbori_at_Night.jpg"
@@ -267,8 +530,8 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-time">14:30</div>
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
-        <div class="tl-title">Haruka 特急 → 難波</div>
-        <div class="tl-desc">關空快速或南海電鐵至難波（約45分鐘）</div>
+        <div class="tl-title">南海電鐵 → 恵美須町（ホテル）</div>
+        <div class="tl-desc">南海 空港急行（なんば方面）乗車 → 天下茶屋駅（9駅・約30分）→ 改札出て 大阪メトロ堺筋線（天神橋筋六丁目方面）乗換 → 恵美須町駅（1駅）→ 4番出口 徒歩1分でホテル</div>
         <span class="tl-tag tag-transport">🚃 電車</span>
       </div>
     </div>
@@ -276,7 +539,7 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-time">15:30</div>
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
-        <div class="tl-title">飯店 Check-in（難波周邊）</div>
+        <div class="tl-title">飯店 Check-in ─ エスリードホテル難波サウスIII</div>
         <div class="tl-desc">放行李、稍作休息（約1小時）</div>
         <span class="tl-tag tag-hotel">🏨 住宿</span>
       </div>
@@ -310,7 +573,15 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
     </div>
   </div>
 
-  <div class="section-title" style="margin-top:16px">🍽 晚餐推薦</div>
+  <div class="section-title" style="margin-top:16px">🏨 住宿資訊</div>
+<div class="hotel-card">
+  <div class="hotel-card-head">エスリードホテル難波サウスIII</div>
+  <div class="hotel-card-body">
+<div class="hotel-row">📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E6%B5%AA%E9%80%9F%E5%8C%BA%E6%81%B5%E7%BE%8E%E9%A0%88%E8%A5%BF2-8-6" target="_blank" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪府大阪市浪速区恵美須西2-8-6</a></div><div class="hotel-row">📞 06-6632-8727</div><div class="hotel-row">🚉 大阪メトロ堺筋線「恵美須町」駅 <strong>4番出口 徒歩1分</strong>（エレベーター → 3番出口）</div><div class="hotel-row">🕐 Check-in: 15:00～00:30　Check-out: ～10:00</div>    <div class="hotel-feats"><span class="feat">🍳 IH廚房</span><span class="feat">🧺 洗衣機</span><span class="feat">❄ 冰箱</span><span class="feat">🛁 浴缸</span><span class="feat">🔒 密碼入住</span><span class="feat">📶 免費Wi-Fi</span></div>
+    <div class="hotel-note">💡 通天閣 徒步5分 · 心齋橋 電車14分 · ドン・キホーテ 徒步圈</div>
+  </div>
+</div>
+<div class="section-title" style="margin-top:16px">🍽 晚餐推薦</div>
   <div class="food-section" style="margin-top:10px">
     <div class="food-card">
       <div class="food-card-head"><h4>中座くいだおれ 大阪たこ焼き</h4><span class="meal-label">必食</span></div>
@@ -378,7 +649,7 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
         <div class="tl-title">早餐後出發 → 近江八幡</div>
-        <div class="tl-desc">難波 → JR難波（大和路快速） → JR近江八幡（約1小時20分）</div>
+        <div class="tl-desc">恵美須町駅（徒歩1分）→ 大阪メトロ堺筋線（天神橋筋六丁目方面・5駅）→ 扇町で 乗換 または 新今宮へ徒歩7分 → JR大阪環状線（内回り・天王寺方面）→ 大阪駅（5駅・15分）→ JR琵琶湖線（米原/長浜方面）→ 近江八幡駅（13駅・45分）　合計 約1時間10分</div>
         <span class="tl-tag tag-transport">🚆 電車</span>
       </div>
     </div>
@@ -508,8 +779,8 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-time">09:00</div>
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
-        <div class="tl-title">JR スーパーはくと → 姬路（車中午餐）</div>
-        <div class="tl-desc">搭乘特急列車，車窗外欣賞山陽風景（約55分）</div>
+        <div class="tl-title">JR 特急スーパーはくと → 姬路（車中午餐）</div>
+        <div class="tl-desc">大阪 or 新大阪駅 → 特急スーパーはくと（鳥取行）乗車 → 方向：尼崎・三ノ宮・姫路方面 停車：三ノ宮→姫路（約55分）→ 姬路駅下車</div>
         <span class="tl-tag tag-transport">🚆 特急</span>
         <span class="tl-tag tag-food" style="margin-left:4px">🍱 車上午餐</span>
       </div>
@@ -528,7 +799,7 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
         <div class="tl-title">姬路 → 鳥取</div>
-        <div class="tl-desc">JR播但線・智頭急行 スーパーはくと（約1小時40分）</div>
+        <div class="tl-desc">スーパーはくと 続乗（鳥取行）→ 智頭急行経由 → 停車：上郡・智頭・郡家 → 鳥取駅（約1時間40分）</div>
         <span class="tl-tag tag-transport">🚆 特急</span>
       </div>
     </div>
@@ -561,7 +832,15 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
     </div>
   </div>
 
-  <div class="section-title" style="margin-top:16px">🍱 車中午餐推薦（大阪購入）</div>
+  <div class="section-title" style="margin-top:16px">🏨 住宿資訊</div>
+<div class="hotel-card">
+  <div class="hotel-card-head">鳥取民泊・住宿（富安）</div>
+  <div class="hotel-card-body">
+<div class="hotel-row">📍 <a href="https://maps.google.com/?q=%E9%B3%A5%E5%8F%96%E5%B8%82%E5%AF%8C%E5%AE%892%E4%B8%81%E7%9B%AE138-2" target="_blank" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">鳥取市富安2丁目138-2（〒680-0845）</a></div><div class="hotel-row">🚉 鳥取駅より タクシー約5分 / 徒歩約10分</div><div class="hotel-row">🗓 Day 3〜6 連泊（6/1 夜 〜 6/5 朝）</div>    <div class="hotel-feats"><span class="feat">🏡 整棟住宿</span><span class="feat">🍳 廚房設備</span><span class="feat">🚿 衛浴</span></div>
+    <div class="hotel-note">💡 砂丘・倉吉・倉敷 日歸均可出發的便利地點</div>
+  </div>
+</div>
+<div class="section-title" style="margin-top:16px">🍱 車中午餐推薦（大阪購入）</div>
   <div class="food-section" style="margin-top:10px">
     <div class="food-card">
       <div class="food-card-head"><h4>崎陽軒 シウマイ弁当</h4><span class="meal-label">經典</span></div>
@@ -613,7 +892,7 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
         <div class="tl-title">早餐後出發</div>
-        <div class="tl-desc">鳥取市內巴士或タクシー → 砂丘（約20分）</div>
+        <div class="tl-desc">鳥取駅前バスターミナル → 日ノ丸バス 101系統「砂丘センター・浜村温泉」行 → 砂丘センター下車（終点方向・7停留所・約25分）</div>
         <span class="tl-tag tag-transport">🚌 巴士</span>
       </div>
     </div>
@@ -725,7 +1004,7 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
         <div class="tl-title">前往三朝温泉</div>
-        <div class="tl-desc">鳥取 → 倉吉バスセンター → 三朝温泉（巴士50分）</div>
+        <div class="tl-desc">鳥取駅バスターミナル → 日ノ丸バス（倉吉・三朝温泉行）→ 「三朝温泉」バス停下車（約50分）</div>
         <span class="tl-tag tag-transport">🚌 巴士</span>
       </div>
     </div>
@@ -743,7 +1022,7 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
         <div class="tl-title">移動至倉吉</div>
-        <div class="tl-desc">三朝温泉 → 倉吉（巴士20分）</div>
+        <div class="tl-desc">三朝温泉バス停 → 日ノ丸バス（倉吉バスセンター行）→ 倉吉バスセンター下車（約25分）</div>
         <span class="tl-tag tag-transport">🚌 巴士</span>
       </div>
     </div>
@@ -844,7 +1123,7 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
         <div class="tl-title">鳥取 → 倉敷</div>
-        <div class="tl-desc">JR山陰本線・伯備線 特急やくも（約2小時30分）</div>
+        <div class="tl-desc">鳥取駅 → JR山陰本線（米子行 普通or特急スーパーまつかぜ）→ 米子駅（18駅・約50分）→ 乗換 JR特急やくも（岡山方面）→ 停車：根雨・備中高梁・総社 → 倉敷駅（約1時間20分）　合計 約2時間10分</div>
         <span class="tl-tag tag-transport">🚆 特急</span>
       </div>
     </div>
@@ -973,8 +1252,8 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-time">09:00</div>
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
-        <div class="tl-title">倉敷 → 大阪</div>
-        <div class="tl-desc">JR 新幹線 新倉敷 → 新大阪（約40分）</div>
+        <div class="tl-title">鳥取 → 大阪</div>
+        <div class="tl-desc">鳥取駅 → JR特急スーパーはくと（大阪/京都行）→ 方向：智頭・姫路・三ノ宮 停車順序：郡家→上郡→相生→姫路→三ノ宮→新大阪→大阪（約2時間30分）</div>
         <span class="tl-tag tag-transport">🚄 新幹線</span>
       </div>
     </div>
@@ -1001,7 +1280,7 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
         <div class="tl-title">難波 → 關西空港</div>
-        <div class="tl-desc">南海電鐵ラピート 或 関空快速（約45分），建議起飛前3小時抵達</div>
+        <div class="tl-desc">南海難波駅 → 南海電鐵 空港急行（関西空港行）→ 天下茶屋・堺・泉佐野 経由 → 関西空港駅（約45分）｜如趕時間可搭ラピート特急（約40分，需特急券）｜建議起飛前3小時抵達</div>
         <span class="tl-tag tag-transport">🚃 電車</span>
       </div>
     </div>
@@ -1081,6 +1360,15 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
 <div class="bottom-safe"></div>
 
 <script>
+
+function showSub(index) {
+  document.querySelectorAll('.sub-panel').forEach(function(p, i) {
+    p.classList.toggle('active', i === index);
+  });
+  document.querySelectorAll('.sub-tab').forEach(function(b, i) {
+    b.classList.toggle('active', i === index);
+  });
+}
 function showDay(index) {
   document.querySelectorAll('.day-panel').forEach(function(p, i) {
     p.classList.toggle('active', i === index);
@@ -1088,11 +1376,39 @@ function showDay(index) {
   document.querySelectorAll('.tab-btn').forEach(function(b, i) {
     b.classList.toggle('active', i === index);
   });
-  // Scroll tab into view
   var btn = document.querySelectorAll('.tab-btn')[index];
   if (btn) btn.scrollIntoView({block:'nearest', inline:'center'});
   window.scrollTo(0, 0);
 }
+function ckChange(cb) {
+  var lbl = cb.nextElementSibling;
+  if (cb.checked) lbl.classList.add('done');
+  else lbl.classList.remove('done');
+  updateProg();
+  try {
+    var s = {};
+    document.querySelectorAll('.cl-item input').forEach(function(c){ s[c.id]=c.checked; });
+    localStorage.setItem('ck_v1', JSON.stringify(s));
+  } catch(e){}
+}
+function updateProg() {
+  var all = document.querySelectorAll('.cl-item input');
+  var done = 0;
+  all.forEach(function(c){ if(c.checked) done++; });
+  var f = document.getElementById('ck-fill');
+  var t = document.getElementById('ck-count');
+  if(f) f.style.width = (done/all.length*100)+'%';
+  if(t) t.textContent = done+' / '+all.length;
+}
+(function(){
+  try {
+    var s = JSON.parse(localStorage.getItem('ck_v1')||'{}');
+    document.querySelectorAll('.cl-item input').forEach(function(c){
+      if(s[c.id]){ c.checked=true; var l=c.nextElementSibling; if(l) l.classList.add('done'); }
+    });
+    updateProg();
+  } catch(e){}
+})();
 </script>
 
 </body>
