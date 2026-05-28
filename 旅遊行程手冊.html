@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>山陰・關西 旅遊行程手冊</title>
+<style>
+:root {
+  --primary: #2c5282;
+  --accent: #e53e3e;
+  --beyblade: #d69e2e;
+  --bg: #f7f8fc;
+  --card: #ffffff;
+  --text: #2d3748;
+  --muted: #718096;
+  --border: #e2e8f0;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
+       background: var(--bg); color: var(--text); font-size: 15px; }
+
+/* ── Header ── */
+.site-header {
+  background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+  color: #fff; padding: 16px 16px 12px;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.site-header h1 { font-size: 18px; font-weight: 700; }
+.site-header p  { font-size: 12px; opacity: .8; margin-top: 2px; }
+
+/* ── Tab Bar ── */
+.tab-bar {
+  display: flex; overflow-x: auto; background: #fff;
+  border-bottom: 2px solid var(--border);
+  position: sticky; top: 60px; z-index: 99;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex: 0 0 auto; padding: 10px 14px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  border: none; background: transparent; color: var(--muted);
+  border-bottom: 3px solid transparent; white-space: nowrap;
+  transition: color .2s, border-color .2s;
+}
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+/* ── Day Panel ── */
+.day-panel { display: none; padding: 0 0 32px; }
+.day-panel.active { display: block; }
+
+/* ── Hero ── */
+.day-hero {
+  height: 160px; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end;
+}
+.day-hero img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: .75;
+}
+.day-hero-bg {
+  position: absolute; inset: 0;
+}
+.day-hero-content {
+  position: relative; z-index: 2; color: #fff;
+  padding: 12px 16px; background: linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 100%);
+  width: 100%;
+}
+.day-hero-content h2 { font-size: 20px; font-weight: 800; }
+.day-hero-content p  { font-size: 13px; opacity: .9; margin-top: 2px; }
+
+/* ── Section Title ── */
+.section-title {
+  font-size: 13px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--primary);
+  padding: 16px 16px 8px; border-left: 4px solid var(--primary);
+  margin-left: 16px; margin-right: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Timeline ── */
+.timeline { padding: 8px 16px 0; }
+.tl-item {
+  display: flex; gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-time {
+  flex: 0 0 52px; font-size: 12px; font-weight: 700;
+  color: var(--primary); padding-top: 2px; text-align: right;
+}
+.tl-dot-col {
+  flex: 0 0 18px; display: flex; flex-direction: column; align-items: center;
+}
+.tl-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--primary); border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--primary); margin-top: 4px;
+}
+.tl-line {
+  flex: 1; width: 2px; background: var(--border); margin-top: 4px;
+}
+.tl-body { flex: 1; }
+.tl-title { font-size: 15px; font-weight: 700; }
+.tl-desc  { font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+.tl-tag {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 20px; margin-top: 5px;
+}
+.tag-transport { background: #ebf8ff; color: #2b6cb0; }
+.tag-food      { background: #fef9c3; color: #92400e; }
+.tag-sightseeing { background: #f0fff4; color: #276749; }
+.tag-hotel     { background: #faf5ff; color: #553c9a; }
+.tag-shopping  { background: #fff5f5; color: #c53030; }
+
+/* ── Beyblade Card ── */
+.beyblade-card {
+  margin: 12px 16px;
+  background: linear-gradient(135deg, #fefcbf 0%, #fde68a 100%);
+  border: 2px solid var(--beyblade);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: 0 2px 8px rgba(214,158,46,.30);
+}
+.beyblade-header {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 800; color: #92400e; margin-bottom: 6px;
+}
+.beyblade-header .icon { font-size: 22px; }
+.beyblade-item {
+  font-size: 13px; color: #78350f;
+  padding: 4px 0; border-bottom: 1px dashed #f59e0b;
+}
+.beyblade-item:last-child { border-bottom: none; }
+.beyblade-item strong { font-weight: 700; }
+
+/* ── Food Cards ── */
+.food-section { padding: 0 16px 8px; }
+.food-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow); margin-bottom: 10px; overflow: hidden;
+}
+.food-card-head {
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.food-card-head h4 { font-size: 15px; font-weight: 700; }
+.food-card-head .meal-label {
+  font-size: 11px; font-weight: 600;
+  background: #ebf4ff; color: #2b6cb0;
+  padding: 2px 8px; border-radius: 20px; flex-shrink: 0;
+}
+.food-card-body { padding: 10px 14px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.food-card-body .address { font-size: 12px; color: #a0aec0; margin-top: 4px; }
+.food-divider { font-size: 11px; font-weight: 700; color: var(--muted); padding: 6px 14px 2px; }
+
+/* ── Shopping Section ── */
+.shop-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow); margin: 0 16px 10px; padding: 12px 14px;
+  border-left: 4px solid var(--accent);
+}
+.shop-card h4 { font-size: 15px; font-weight: 700; color: var(--accent); }
+.shop-card p  { font-size: 13px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+.shop-card .shop-note {
+  font-size: 12px; color: #718096; margin-top: 6px; padding-top: 6px;
+  border-top: 1px dashed var(--border);
+}
+
+/* ── Bottom safe area ── */
+.bottom-safe { height: env(safe-area-inset-bottom, 24px); }
+
+  /* Photo strip */
+  .photo-strip {
+    display: flex; gap: 8px; overflow-x: auto;
+    padding: 8px 16px 12px; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .photo-strip::-webkit-scrollbar { display: none; }
+  .photo-card {
+    flex: 0 0 auto; width: 150px; height: 105px;
+    border-radius: 10px; overflow: hidden; position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18); background: #cbd5e0;
+  }
+  .photo-card img { width:100%; height:100%; object-fit:cover; display:block; }
+  .photo-caption {
+    position: absolute; bottom:0; left:0; right:0;
+    background: linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 100%);
+    color:#fff; font-size:11px; font-weight:600; padding:5px 7px;
+  }
+  /* iOS tap fix */
+  .tab-btn {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none; user-select: none;
+    outline: none;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>🗾 山陰・關西 旅遊行程</h1>
+  <p>2025年5月30日 — 6月5日｜4大人 2小孩</p>
+</header>
+
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="showDay(0)">Day1<br><span style="font-size:10px;font-weight:400">大阪</span></button>
+  <button class="tab-btn" onclick="showDay(1)">Day2<br><span style="font-size:10px;font-weight:400">近江八幡</span></button>
+  <button class="tab-btn" onclick="showDay(2)">Day3<br><span style="font-size:10px;font-weight:400">移動</span></button>
+  <button class="tab-btn" onclick="showDay(3)">Day4<br><span style="font-size:10px;font-weight:400">砂丘</span></button>
+  <button class="tab-btn" onclick="showDay(4)">Day5<br><span style="font-size:10px;font-weight:400">倉吉</span></button>
+  <button class="tab-btn" onclick="showDay(5)">Day6<br><span style="font-size:10px;font-weight:400">倉敷</span></button>
+  <button class="tab-btn" onclick="showDay(6)">Day7<br><span style="font-size:10px;font-weight:400">回台</span></button>
+</div>
+
+<!-- ════════════════════════════════════════
+     DAY 1  大阪
+════════════════════════════════════════ -->
+<div class="day-panel active" id="day0">
+  <div class="day-hero">
+    <div class="day-hero-bg" style="background:linear-gradient(160deg,#1a0533 0%,#3D1A78 55%,#1B3A5C 100%)"></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Dotonbori_at_Night.jpg/640px-Dotonbori_at_Night.jpg"
+         onerror="this.style.display='none'" alt="道頓堀夜景">
+    <div class="day-hero-content">
+      <h2>Day 1 — 大阪入城</h2>
+      <p>5月30日（週五）｜桃園 → 關西空港 → 難波</p>
+    </div>
+  </div>
+<div class="photo-strip"><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Dotonbori_at_Night.jpg/480px-Dotonbori_at_Night.jpg" loading="lazy" alt="道頓堀夜景" onerror="this.parentNode.style.display='none'"><div class="photo-caption">道頓堀夜景</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Takoyaki_in_Osaka.jpg/480px-Takoyaki_in_Osaka.jpg" loading="lazy" alt="たこ焼き" onerror="this.parentNode.style.display='none'"><div class="photo-caption">たこ焼き</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Osaka_Castle%2C_Osaka%2C_Japan.jpg/480px-Osaka_Castle%2C_Osaka%2C_Japan.jpg" loading="lazy" alt="大阪城" onerror="this.parentNode.style.display='none'"><div class="photo-caption">大阪城</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Namba_Parks_Osaka_Japan.jpg/480px-Namba_Parks_Osaka_Japan.jpg" loading="lazy" alt="難波" onerror="this.parentNode.style.display='none'"><div class="photo-caption">難波</div></div></div>
+
+
+  <!-- Beyblade -->
+  <div class="beyblade-card">
+    <div class="beyblade-header"><span class="icon">🪀</span>戰鬥陀螺 購買點 — Day 1</div>
+    <div class="beyblade-item"><strong>ドン・キホーテ 道頓堀店</strong><br>📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8D%80%E9%81%93%E9%A0%93%E5%A0%801-7-1%EF%BC%88%E6%AD%A5%E8%A1%8C%E5%8F%AF%E9%81%94%EF%BC%89" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市中央區道頓堀1-7-1（步行可達）</a></div>
+    <div class="beyblade-item"><strong>ドン・キホーテ 難波本店</strong><br>📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E6%B5%AA%E9%80%9F%E5%8D%80%E9%9B%A3%E6%B3%A2%E4%B8%AD2-10-70%EF%BD%9C%E7%8E%A9%E5%85%B7%E3%83%BB%E3%83%9B%E3%83%93%E3%83%BC%E5%A3%B2%E5%A0%B4" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市浪速區難波中2-10-70｜玩具・ホビー売場</a></div>
+    <div class="beyblade-item" style="font-size:12px;color:#92400e">💡 入住難波後步行前往，營業至深夜，種類最齊全！</div>
+  </div>
+
+  <div class="section-title">📅 今日行程</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">08:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">桃園機場出發</div>
+        <div class="tl-desc">建議提早2.5小時抵達辦理登機，長榮/中華航空直飛關西</div>
+        <span class="tl-tag tag-transport">✈ 航班</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">抵達關西國際空港</div>
+        <div class="tl-desc">入境審查 · 提行李 · 換JR PASS（約1.5小時）</div>
+        <span class="tl-tag tag-transport">🚆 交通</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">14:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">Haruka 特急 → 難波</div>
+        <div class="tl-desc">關空快速或南海電鐵至難波（約45分鐘）</div>
+        <span class="tl-tag tag-transport">🚃 電車</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">15:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">飯店 Check-in（難波周邊）</div>
+        <div class="tl-desc">放行李、稍作休息（約1小時）</div>
+        <span class="tl-tag tag-hotel">🏨 住宿</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">17:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">道頓堀・難波散步</div>
+        <div class="tl-desc">格力高跑者看板 · 心齋橋筋 · 法善寺横丁</div>
+        <span class="tl-tag tag-sightseeing">🗺 觀光</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">19:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">晚餐</div>
+        <div class="tl-desc">道頓堀美食街（詳見下方餐廳推薦）</div>
+        <span class="tl-tag tag-food">🍜 餐飲</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">21:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">ドン・キホーテ 戰鬥陀螺採購 🪀</div>
+        <div class="tl-desc">難波本店或道頓堀店，深夜也有開！</div>
+        <span class="tl-tag tag-shopping">🛍 購物</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:16px">🍽 晚餐推薦</div>
+  <div class="food-section" style="margin-top:10px">
+    <div class="food-card">
+      <div class="food-card-head"><h4>中座くいだおれ 大阪たこ焼き</h4><span class="meal-label">必食</span></div>
+      <div class="food-card-body">
+        道頓堀名物たこ焼き，一顆顆Q彈外酥，適合邊走邊吃。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8D%80%E9%81%93%E9%A0%93%E5%A0%801-7-21" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市中央區道頓堀1-7-21</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>金龍ラーメン 道頓堀店</h4><span class="meal-label">深夜食堂</span></div>
+      <div class="food-card-body">
+        24小時營業的道頓堀拉麵老店，濃郁豚骨湯頭，¥700起，小孩接受度高。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8D%80%E9%81%93%E9%A0%93%E5%A0%801-7-26" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市中央區道頓堀1-7-26</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>千房 道頓堀本店（お好み焼き）</h4><span class="meal-label">大阪名物</span></div>
+      <div class="food-card-body">
+        關西風大阪燒名店，鐵板現做，豚玉・海鮮燒各具特色，非常適合一家人共享。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8D%80%E9%81%93%E9%A0%93%E5%A0%801-9-1" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市中央區道頓堀1-9-1</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>かに道楽 道頓堀本店（蟹道樂）</h4><span class="meal-label">高質感</span></div>
+      <div class="food-card-body">
+        螃蟹料理名店，門口大螃蟹模型是道頓堀地標。套餐¥5,000起，適合慶祝或犒賞。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8D%80%E9%81%93%E9%A0%93%E5%A0%801-6-18" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市中央區道頓堀1-6-18</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🛍 周邊購物・土産</div>
+  <div style="margin-top:10px">
+    <div class="shop-card">
+      <h4>心齋橋筋商店街</h4>
+      <p>大阪最熱鬧的購物街，UNIQLO、藥妝大國、伴手禮一應俱全。</p>
+    </div>
+    <div class="shop-card">
+      <h4>くいだおれ太郎 周邊商品</h4>
+      <p>道頓堀限定伴手禮、大阪限定零食，打卡必買。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     DAY 2  近江八幡・彦根
+════════════════════════════════════════ -->
+<div class="day-panel" id="day1">
+  <div class="day-hero">
+    <div class="day-hero-bg" style="background:linear-gradient(160deg,#1a5c2e 0%,#2E8B57 60%,#1a5c2e 100%)"></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Omihachiman_Hachimanbori.jpg/640px-Omihachiman_Hachimanbori.jpg"
+         onerror="this.style.display='none'" alt="近江八幡水鄉">
+    <div class="day-hero-content">
+      <h2>Day 2 — 近江八幡・彦根</h2>
+      <p>5月31日（週六）｜水鄉・八幡城・La Collina</p>
+    </div>
+  </div>
+<div class="photo-strip"><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Omihachiman_Hachimanbori.jpg/480px-Omihachiman_Hachimanbori.jpg" loading="lazy" alt="八幡堀水鄉" onerror="this.parentNode.style.display='none'"><div class="photo-caption">八幡堀水鄉</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Hikone_castle01s3872.jpg/480px-Hikone_castle01s3872.jpg" loading="lazy" alt="彦根城" onerror="this.parentNode.style.display='none'"><div class="photo-caption">彦根城</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Biwako_001.jpg/480px-Biwako_001.jpg" loading="lazy" alt="琵琶湖" onerror="this.parentNode.style.display='none'"><div class="photo-caption">琵琶湖</div></div></div>
+
+
+  <div class="section-title">📅 今日行程</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">08:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">早餐後出發 → 近江八幡</div>
+        <div class="tl-desc">難波 → JR難波（大和路快速） → JR近江八幡（約1小時20分）</div>
+        <span class="tl-tag tag-transport">🚆 電車</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">八幡堀・水鄉散步</div>
+        <div class="tl-desc">舊商家街道・河川遊船（約1.5小時）</div>
+        <span class="tl-tag tag-sightseeing">⛵ 觀光</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">La Collina 近江八幡</div>
+        <div class="tl-desc">たねや・CLUB HARIE 旗艦店，大草坪＋新鮮バウムクーヘン（約1.5小時）</div>
+        <span class="tl-tag tag-food">🎂 甜點</span>
+        <span class="tl-tag tag-shopping" style="margin-left:4px">🛍 土産</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">午餐（近江八幡周邊）</div>
+        <div class="tl-desc">詳見下方餐廳推薦</div>
+        <span class="tl-tag tag-food">🍱 餐飲</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">15:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">彦根城</div>
+        <div class="tl-desc">現存12天守之一・彥根喵吉祥物周邊（約2小時）</div>
+        <span class="tl-tag tag-sightseeing">🏯 觀光</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">17:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">返回大阪・晚餐</div>
+        <div class="tl-desc">彥根 → JR → 大阪（約1小時15分）</div>
+        <span class="tl-tag tag-transport">🚆 電車</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:16px">🍽 餐廳推薦</div>
+  <div class="food-section" style="margin-top:10px">
+    <div class="food-divider">午餐選項</div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>毛利志満（近江牛すき焼き）</h4><span class="meal-label">在地名物</span></div>
+      <div class="food-card-body">
+        近江八幡老舖，近江牛壽喜燒套餐，肉質細嫩，適合一家人圍爐共享。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E8%BF%91%E6%B1%9F%E5%85%AB%E5%B9%A1%E5%B8%82%E9%AD%9A%E5%B1%8B%E7%94%BA" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">近江八幡市魚屋町</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>和カフェ yusoshi</h4><span class="meal-label">下午茶</span></div>
+      <div class="food-card-body">
+        抹茶甜點・和風帕菲，La Collina 附近，適合午後休息。
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>La Collina カフェ</h4><span class="meal-label">必訪</span></div>
+      <div class="food-card-body">
+        現烤バウムクーヘン・鬆餅・限定飲品，建議11點前抵達以避人潮，可在草坪野餐式享用。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E6%BB%8B%E8%B3%80%E7%B8%A3%E8%BF%91%E6%B1%9F%E5%85%AB%E5%B9%A1%E5%B8%82%E5%8C%97%E4%B9%8B%E5%BA%84%E7%94%BA615-1" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">滋賀縣近江八幡市北之庄町615-1</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🛍 購物・土産</div>
+  <div style="margin-top:10px">
+    <div class="shop-card">
+      <h4>La Collina Shop（たねや・CLUB HARIE）</h4>
+      <p>近江八幡限定バウムクーヘン・和菓子禮盒，是非常熱門的伴手禮。</p>
+      <p class="shop-note">🏷 建議早到，限量商品易售罄</p>
+    </div>
+    <div class="shop-card">
+      <h4>彦根城 周邊商店</h4>
+      <p>彥根喵（ひこにゃん）系列周邊商品：毛巾、杯子、零食，兒童最愛！</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     DAY 3  大阪 → 鳥取 移動日
+════════════════════════════════════════ -->
+<div class="day-panel" id="day2">
+  <div class="day-hero">
+    <div class="day-hero-bg" style="background:linear-gradient(160deg,#C84B00 0%,#E8731A 60%,#b35900 100%)"></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Himeji_castle_in_the_spring.jpg/640px-Himeji_castle_in_the_spring.jpg"
+         onerror="this.style.display='none'" alt="姬路城">
+    <div class="day-hero-content">
+      <h2>Day 3 — 移動日・姫路經過</h2>
+      <p>6月1日（週日）｜大阪 → 姫路 → 鳥取</p>
+    </div>
+  </div>
+<div class="photo-strip"><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Himeji_castle_in_the_spring.jpg/480px-Himeji_castle_in_the_spring.jpg" loading="lazy" alt="姬路城" onerror="this.parentNode.style.display='none'"><div class="photo-caption">姬路城</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Tottori-Sakyu_Tottori_Japan.JPG/480px-Tottori-Sakyu_Tottori_Japan.JPG" loading="lazy" alt="鳥取砂丘" onerror="this.parentNode.style.display='none'"><div class="photo-caption">鳥取砂丘</div></div></div>
+
+
+  <!-- Beyblade Day 3 -->
+  <div class="beyblade-card">
+    <div class="beyblade-header"><span class="icon">🪀</span>戰鬥陀螺 購買點 — Day 3</div>
+    <div class="beyblade-item"><strong>イオン（AEON）鳥取店 玩具売場</strong><br>📍 <a href="https://maps.google.com/?q=%E9%B3%A5%E5%8F%96%E5%B8%82%E5%8D%97%E5%90%89%E6%96%B93%E4%B8%81%E7%9B%AE201%EF%BD%9C2F%20%E7%8E%A9%E5%85%B7%E3%83%BB%E3%83%9B%E3%83%93%E3%83%BC%E5%8C%BA" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">鳥取市南吉方3丁目201｜2F 玩具・ホビー区</a></div>
+    <div class="beyblade-item"><strong>ドン・キホーテ 鳥取店</strong><br>📍 <a href="https://maps.google.com/?q=%E9%B3%A5%E5%8F%96%E5%B8%82%E5%AF%8C%E5%AE%892%E4%B8%81%E7%9B%AE109" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">鳥取市富安2丁目109</a></div>
+    <div class="beyblade-item" style="font-size:12px;color:#92400e">💡 抵達鳥取後可先去 AEON 超市採買，順便逛玩具区！</div>
+  </div>
+
+  <div class="section-title">📅 今日行程</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">08:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">大阪出發</div>
+        <div class="tl-desc">辦理退房，前往新大阪・JR特急スーパーはくと</div>
+        <span class="tl-tag tag-hotel">🏨 退房</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">09:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">JR スーパーはくと → 姬路（車中午餐）</div>
+        <div class="tl-desc">搭乘特急列車，車窗外欣賞山陽風景（約55分）</div>
+        <span class="tl-tag tag-transport">🚆 特急</span>
+        <span class="tl-tag tag-food" style="margin-left:4px">🍱 車上午餐</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">姬路城（可選）</div>
+        <div class="tl-desc">世界遺產白鷺城，在姫路站旁，可短暫停留1.5小時後繼續前進</div>
+        <span class="tl-tag tag-sightseeing">🏯 世界遺產</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">姬路 → 鳥取</div>
+        <div class="tl-desc">JR播但線・智頭急行 スーパーはくと（約1小時40分）</div>
+        <span class="tl-tag tag-transport">🚆 特急</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">15:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">抵達鳥取・Check-in</div>
+        <div class="tl-desc">飯店放行李，休息片刻（約1小時）</div>
+        <span class="tl-tag tag-hotel">🏨 住宿</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">16:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">AEON 鳥取 採購 🪀</div>
+        <div class="tl-desc">超市補給・玩具区逛陀螺，2F 有玩具売場</div>
+        <span class="tl-tag tag-shopping">🛒 購物</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">19:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">晚餐</div>
+        <div class="tl-desc">鳥取市內餐廳（松葉ガニ・梨牛奶拉麵）</div>
+        <span class="tl-tag tag-food">🦀 餐飲</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:16px">🍱 車中午餐推薦（大阪購入）</div>
+  <div class="food-section" style="margin-top:10px">
+    <div class="food-card">
+      <div class="food-card-head"><h4>崎陽軒 シウマイ弁当</h4><span class="meal-label">經典</span></div>
+      <div class="food-card-body">新大阪站購入，港式燒賣＋煮菜便當，小孩接受度高。</div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>大阪ずし（押し寿司）</h4><span class="meal-label">在地特色</span></div>
+      <div class="food-card-body">關西風箱壽司，各類魚貨，在新大阪或大阪站地下街購入。</div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>家族便當組合（駅弁）</h4><span class="meal-label">豐盛</span></div>
+      <div class="food-card-body">新大阪站 2F 駅弁屋「祭」，種類超過30種，可挑選家人各喜好搭配。</div>
+    </div>
+  </div>
+
+  <div class="section-title">🛍 鳥取購物</div>
+  <div style="margin-top:10px">
+    <div class="shop-card">
+      <h4>AEON 鳥取店</h4>
+      <p>超市補給、當地食材、伴手禮，玩具売場在2F。</p>
+    </div>
+    <div class="shop-card">
+      <h4>ドン・キホーテ 鳥取店</h4>
+      <p>藥妝・零食・玩具，鳥取陀螺採購備用點。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     DAY 4  鳥取砂丘
+════════════════════════════════════════ -->
+<div class="day-panel" id="day3">
+  <div class="day-hero">
+    <div class="day-hero-bg" style="background:linear-gradient(160deg,#8B6914 0%,#D4A843 60%,#8B6914 100%)"></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Tottori-Sakyu_Tottori_Japan.JPG/640px-Tottori-Sakyu_Tottori_Japan.JPG"
+         onerror="this.style.display='none'" alt="鳥取砂丘">
+    <div class="day-hero-content">
+      <h2>Day 4 — 鳥取砂丘</h2>
+      <p>6月2日（週一）｜砂丘・砂の美術館・水木しげるロード</p>
+    </div>
+  </div>
+<div class="photo-strip"><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Tottori-Sakyu_Tottori_Japan.JPG/480px-Tottori-Sakyu_Tottori_Japan.JPG" loading="lazy" alt="鳥取砂丘" onerror="this.parentNode.style.display='none'"><div class="photo-caption">鳥取砂丘</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Mizuki_Shigeru_Road.JPG/320px-Mizuki_Shigeru_Road.JPG" loading="lazy" alt="水木しげるロード" onerror="this.parentNode.style.display='none'"><div class="photo-caption">水木しげるロード</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Tottori_Sakyu_05.jpg/480px-Tottori_Sakyu_05.jpg" loading="lazy" alt="砂丘全景" onerror="this.parentNode.style.display='none'"><div class="photo-caption">砂丘全景</div></div></div>
+
+
+  <div class="section-title">📅 今日行程</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">09:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">早餐後出發</div>
+        <div class="tl-desc">鳥取市內巴士或タクシー → 砂丘（約20分）</div>
+        <span class="tl-tag tag-transport">🚌 巴士</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">09:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">鳥取砂丘</div>
+        <div class="tl-desc">日本最大砂丘，爬沙山・俯瞰日本海，騎駱駝體驗，帶小孩玩沙。記得帶換洗衣物！（約2小時）</div>
+        <span class="tl-tag tag-sightseeing">🏜 自然</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">砂の美術館</div>
+        <div class="tl-desc">世界級砂雕藝術展，令人驚嘆，小孩超愛（約1小時）</div>
+        <span class="tl-tag tag-sightseeing">🎨 藝術</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">午餐</div>
+        <div class="tl-desc">砂丘周邊餐廳（詳見下方推薦）</div>
+        <span class="tl-tag tag-food">🦀 午餐</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">15:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">境港・水木しげるロード（可選）</div>
+        <div class="tl-desc">鬼太郎妖怪街，兒童最愛，鬼太郎周邊商品琳瑯滿目（巴士約1小時）</div>
+        <span class="tl-tag tag-sightseeing">👻 妖怪</span>
+        <span class="tl-tag tag-shopping" style="margin-left:4px">🛍 購物</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">18:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">晚餐・返回飯店</div>
+        <div class="tl-desc">鳥取市内・松葉ガニ或鳥取牛料理</div>
+        <span class="tl-tag tag-food">🍽 晚餐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:16px">🍽 午餐推薦</div>
+  <div class="food-section" style="margin-top:10px">
+    <div class="food-card">
+      <div class="food-card-head"><h4>砂丘センター（さきゅうセンター）</h4><span class="meal-label">就近</span></div>
+      <div class="food-card-body">
+        砂丘入口旁，鳥取名物梨ソフト・松葉ガニ定食，吃完繼續玩。
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>海鮮料理 漁火（いさりび）</h4><span class="meal-label">海鮮</span></div>
+      <div class="food-card-body">
+        鳥取港直送鮮魚，松葉ガニ・鳥取和牛，地產地銷。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E9%B3%A5%E5%8F%96%E5%B8%82%E8%B3%80%E9%9C%B2%E7%94%BA" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">鳥取市賀露町</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>鳥取牛骨ラーメン「砂丘ビール」</h4><span class="meal-label">在地特色</span></div>
+      <div class="food-card-body">
+        鳥取獨特的牛骨湯頭拉麵，鮮甜清爽，和豚骨完全不同風味，值得一試。
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🛍 購物・土産</div>
+  <div style="margin-top:10px">
+    <div class="shop-card">
+      <h4>鳥取砂丘 記念品店</h4>
+      <p>砂丘土産：鳥取梨零食、砂丘造型餅乾、梨子醬、砂入小瓶裝紀念品。</p>
+    </div>
+    <div class="shop-card">
+      <h4>水木しげる記念館 Shop</h4>
+      <p>鬼太郎・目玉おやじ周邊商品，兒童超愛的妖怪零食禮盒。</p>
+      <p class="shop-note">🏷 鬼太郎商品全日本最齊全，在這裡買！</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     DAY 5  三朝温泉・倉吉
+════════════════════════════════════════ -->
+<div class="day-panel" id="day4">
+  <div class="day-hero">
+    <div class="day-hero-bg" style="background:linear-gradient(160deg,#8B3A0F 0%,#C96A2A 60%,#7a3310 100%)"></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Misasa-Onsen-001.jpg/640px-Misasa-Onsen-001.jpg"
+         onerror="this.style.display='none'" alt="三朝温泉">
+    <div class="day-hero-content">
+      <h2>Day 5 — 三朝温泉・倉吉</h2>
+      <p>6月3日（週二）｜泡湯・白壁土倉群・打吹公園</p>
+    </div>
+  </div>
+<div class="photo-strip"><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Misasa-Onsen-001.jpg/480px-Misasa-Onsen-001.jpg" loading="lazy" alt="三朝温泉" onerror="this.parentNode.style.display='none'"><div class="photo-caption">三朝温泉</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Shirakabe_Dozokun_Kurayoshi.jpg/480px-Shirakabe_Dozokun_Kurayoshi.jpg" loading="lazy" alt="倉吉白壁" onerror="this.parentNode.style.display='none'"><div class="photo-caption">倉吉白壁</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Kurayoshi_Akaiwakan.jpg/480px-Kurayoshi_Akaiwakan.jpg" loading="lazy" alt="赤瓦一号館" onerror="this.parentNode.style.display='none'"><div class="photo-caption">赤瓦一号館</div></div></div>
+
+
+  <div class="section-title">📅 今日行程</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">09:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">前往三朝温泉</div>
+        <div class="tl-desc">鳥取 → 倉吉バスセンター → 三朝温泉（巴士50分）</div>
+        <span class="tl-tag tag-transport">🚌 巴士</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">三朝橋 足湯・河原風呂</div>
+        <div class="tl-desc">世界屈指のラジウム泉，橋上足湯免費，小孩超愛泡！（約1小時）</div>
+        <span class="tl-tag tag-sightseeing">♨ 溫泉</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">移動至倉吉</div>
+        <div class="tl-desc">三朝温泉 → 倉吉（巴士20分）</div>
+        <span class="tl-tag tag-transport">🚌 巴士</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">午餐</div>
+        <div class="tl-desc">倉吉市内（詳見下方推薦）</div>
+        <span class="tl-tag tag-food">🍜 午餐</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">倉吉 白壁土倉群・赤瓦</div>
+        <div class="tl-desc">江戶時代白壁倉庫群・小玩意工藝店・赤瓦一號館（約2小時）</div>
+        <span class="tl-tag tag-sightseeing">🏛 歷史街道</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">16:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">打吹公園</div>
+        <div class="tl-desc">小孩跑跳玩耍，日本百景公園（約1小時）</div>
+        <span class="tl-tag tag-sightseeing">🌸 公園</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">18:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">晚餐・返回鳥取</div>
+        <div class="tl-desc">倉吉市内或返鳥取用餐</div>
+        <span class="tl-tag tag-food">🍽 晚餐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:16px">🍽 午餐推薦</div>
+  <div class="food-section" style="margin-top:10px">
+    <div class="food-card">
+      <div class="food-card-head"><h4>廣榮堂 倉吉店（きびだんご）</h4><span class="meal-label">在地名物</span></div>
+      <div class="food-card-body">
+        岡山・鳥取地區名物黍糰子，可內用也可外帶，現做Q彈，小孩最愛。
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>赤瓦一号館 カフェ</h4><span class="meal-label">歷史建築</span></div>
+      <div class="food-card-body">
+        古倉庫改建，鳥取地產食材定食・咖哩飯，環境優美。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E5%80%89%E5%90%89%E5%B8%82%E9%AD%9A%E7%94%BA2516-1" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">倉吉市魚町2516-1</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>鳥取梨ソフトクリーム</h4><span class="meal-label">必吃</span></div>
+      <div class="food-card-body">
+        倉吉街道上隨處可見，新鮮鳥取梨製成的霜淇淋，大人小孩都愛！
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🛍 購物・土産</div>
+  <div style="margin-top:10px">
+    <div class="shop-card">
+      <h4>赤瓦 工藝品店</h4>
+      <p>倉吉地區手工藝品：和紙、鄉土玩具、傳統陶器，獨一無二的伴手禮。</p>
+    </div>
+    <div class="shop-card">
+      <h4>鳥取梨製品（倉吉）</h4>
+      <p>梨果凍、梨奶油夾心餅、梨子醬，超適合帶回台灣送禮。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     DAY 6  倉敷
+════════════════════════════════════════ -->
+<div class="day-panel" id="day5">
+  <div class="day-hero">
+    <div class="day-hero-bg" style="background:linear-gradient(160deg,#0D4F7A 0%,#1B7A9E 60%,#0a3d5e 100%)"></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Kurashiki_Bikan.jpg/640px-Kurashiki_Bikan.jpg"
+         onerror="this.style.display='none'" alt="倉敷美觀地區">
+    <div class="day-hero-content">
+      <h2>Day 6 — 倉敷 美觀地區</h2>
+      <p>6月4日（週三）｜白壁運河・大原美術館・アイビースクエア</p>
+    </div>
+  </div>
+<div class="photo-strip"><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Kurashiki_Bikan.jpg/480px-Kurashiki_Bikan.jpg" loading="lazy" alt="倉敷美觀地區" onerror="this.parentNode.style.display='none'"><div class="photo-caption">倉敷美觀地區</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Ohara_Museum_of_Art_1.jpg/480px-Ohara_Museum_of_Art_1.jpg" loading="lazy" alt="大原美術館" onerror="this.parentNode.style.display='none'"><div class="photo-caption">大原美術館</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Kurashiki_canal.jpg/480px-Kurashiki_canal.jpg" loading="lazy" alt="倉敷運河" onerror="this.parentNode.style.display='none'"><div class="photo-caption">倉敷運河</div></div></div>
+
+
+  <div class="section-title">📅 今日行程</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">08:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">鳥取 → 倉敷</div>
+        <div class="tl-desc">JR山陰本線・伯備線 特急やくも（約2小時30分）</div>
+        <span class="tl-tag tag-transport">🚆 特急</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">倉敷 Check-in・美觀地區散步</div>
+        <div class="tl-desc">白壁倉庫・柳樹・運河遊船（約2小時）</div>
+        <span class="tl-tag tag-sightseeing">⛵ 觀光</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">午餐</div>
+        <div class="tl-desc">美觀地區周邊（詳見下方推薦）</div>
+        <span class="tl-tag tag-food">🍱 午餐</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">14:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">大原美術館</div>
+        <div class="tl-desc">日本最古老私立西洋美術館，收藏莫內・畢卡索（約1.5小時）</div>
+        <span class="tl-tag tag-sightseeing">🖼 美術館</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">16:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">阿智神社・アイビースクエア</div>
+        <div class="tl-desc">紡績工廠遺址改建的複合設施，散步拍照（約1小時）</div>
+        <span class="tl-tag tag-sightseeing">🌿 歷史</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">18:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">晚餐</div>
+        <div class="tl-desc">美觀地區夜景餐廳</div>
+        <span class="tl-tag tag-food">🍽 晚餐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:16px">🍽 午餐推薦</div>
+  <div class="food-section" style="margin-top:10px">
+    <div class="food-card">
+      <div class="food-card-head"><h4>倉敷珈琲館</h4><span class="meal-label">老建築</span></div>
+      <div class="food-card-body">
+        美觀地區古民家改裝咖啡館，虹吸式手沖咖啡・輕食套餐，環境絕佳。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E5%80%89%E6%95%B7%E5%B8%82%E6%9C%AC%E7%94%BA4-1" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">倉敷市本町4-1</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>むらすゞめ（倉敷銘菓）</h4><span class="meal-label">必吃</span></div>
+      <div class="food-card-body">
+        倉敷名物：求肥內裡紅豆餡和菓子，現做熱呼呼，可在店內品嚐配茶。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E5%80%89%E6%95%B7%E5%B8%82%E9%98%BF%E7%9F%A52-22-10" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">倉敷市阿知2-22-10</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>El Greco カフェ</h4><span class="meal-label">網紅打卡</span></div>
+      <div class="food-card-body">
+        1959年開業的倉敷最古老咖啡館，常春藤蔓爬滿外牆，歐風氛圍十足。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E5%80%89%E6%95%B7%E5%B8%82%E6%9C%AC%E7%94%BA1-11" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">倉敷市本町1-11</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🛍 購物・土産</div>
+  <div style="margin-top:10px">
+    <div class="shop-card">
+      <h4>倉敷帆布製品</h4>
+      <p>百年歷史的倉敷帆布，製成包包・托特袋，耐用又有質感，全日本限定。</p>
+      <p class="shop-note">🏷 美觀地區多間帆布専賣店，可客製刺繡</p>
+    </div>
+    <div class="shop-card">
+      <h4>むらすゞめ・桃太郎零食</h4>
+      <p>岡山名物桃太郎系列零食、倉敷限定年輪蛋糕，適合大量購買帶回。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     DAY 7  回台
+════════════════════════════════════════ -->
+<div class="day-panel" id="day6">
+  <div class="day-hero">
+    <div class="day-hero-bg" style="background:linear-gradient(160deg,#E8731A 0%,#F5A623 50%,#d45f00 100%)"></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Kansai_International_Airport_Aerial_photograph.JPG/640px-Kansai_International_Airport_Aerial_photograph.JPG"
+         onerror="this.style.display='none'" alt="關西機場">
+    <div class="day-hero-content">
+      <h2>Day 7 — 最終日・回台</h2>
+      <p>6月5日（週四）｜倉敷 → 大阪 → 關西空港 → 台灣</p>
+    </div>
+  </div>
+<div class="photo-strip"><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Kansai_International_Airport_Aerial_photograph.JPG/480px-Kansai_International_Airport_Aerial_photograph.JPG" loading="lazy" alt="關西國際空港" onerror="this.parentNode.style.display='none'"><div class="photo-caption">關西國際空港</div></div><div class="photo-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Dotonbori_at_Night.jpg/480px-Dotonbori_at_Night.jpg" loading="lazy" alt="難波・最後一夜" onerror="this.parentNode.style.display='none'"><div class="photo-caption">難波・最後一夜</div></div></div>
+
+
+  <!-- Beyblade Day 7 -->
+  <div class="beyblade-card">
+    <div class="beyblade-header"><span class="icon">🪀</span>戰鬥陀螺 最後補貨機會 — Day 7</div>
+    <div class="beyblade-item"><strong>ドン・キホーテ 難波本店（最後機會！）</strong><br>📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E6%B5%AA%E9%80%9F%E5%8D%80%E9%9B%A3%E6%B3%A2%E4%B8%AD2-10-70%EF%BD%9C%E7%87%9F%E6%A5%AD%E8%87%B3%E6%B7%B1%E5%A4%9C" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市浪速區難波中2-10-70｜營業至深夜</a></div>
+    <div class="beyblade-item"><strong>關西空港 免稅店 / ANA FESTA</strong><br>📍 <a href="https://maps.google.com/?q=%E9%97%9C%E8%A5%BF%E7%A9%BA%E6%B8%AF%20%E5%87%BA%E5%A2%83%E5%BE%8C%20Duty%20Free%EF%BC%8C%E7%8E%A9%E5%85%B7%E5%8D%80%E5%8F%AF%E8%83%BD%E6%9C%89%E5%94%AE" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">關西空港 出境後 Duty Free，玩具區可能有售</a></div>
+    <div class="beyblade-item" style="font-size:12px;color:#92400e">⚠️ 回程前最後採購！難波 ドンキ 是最可靠的選擇</div>
+  </div>
+
+  <div class="section-title">📅 今日行程</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">08:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">飯店 Check-out</div>
+        <div class="tl-desc">整理行李，退房，存放行李</div>
+        <span class="tl-tag tag-hotel">🏨 退房</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">09:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">倉敷 → 大阪</div>
+        <div class="tl-desc">JR 新幹線 新倉敷 → 新大阪（約40分）</div>
+        <span class="tl-tag tag-transport">🚄 新幹線</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">大阪 最後買物 🪀</div>
+        <div class="tl-desc">難波ドン・キホーテ 最後採購！藥妝・零食・玩具陀螺一次補齊</div>
+        <span class="tl-tag tag-shopping">🛍 購物</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">午餐</div>
+        <div class="tl-desc">大阪最後一餐（詳見下方推薦）</div>
+        <span class="tl-tag tag-food">🍱 午餐</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">14:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">難波 → 關西空港</div>
+        <div class="tl-desc">南海電鐵ラピート 或 関空快速（約45分），建議起飛前3小時抵達</div>
+        <span class="tl-tag tag-transport">🚃 電車</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">15:00</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">關西空港・辦理登機</div>
+        <div class="tl-desc">拖運行李・安檢・出境，出境後免稅店補貨</div>
+        <span class="tl-tag tag-transport">✈ 機場</span>
+        <span class="tl-tag tag-shopping" style="margin-left:4px">🛍 免稅</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">17:30</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">起飛 → 桃園</div>
+        <div class="tl-desc">飛行約2.5小時，抵達台灣</div>
+        <span class="tl-tag tag-transport">✈ 回家</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:16px">🍽 最後一餐推薦</div>
+  <div class="food-section" style="margin-top:10px">
+    <div class="food-card">
+      <div class="food-card-head"><h4>一蘭拉麵 難波店</h4><span class="meal-label">輕鬆快速</span></div>
+      <div class="food-card-body">
+        獨立式一人隔間，濃郁豚骨，快速用餐，適合出發前最後一頓。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8D%80%E9%9B%A3%E6%B3%A23%E4%B8%81%E7%9B%AE" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市中央區難波3丁目</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>黒門市場（朝食・輕食）</h4><span class="meal-label">市場體驗</span></div>
+      <div class="food-card-body">
+        大阪的廚房，新鮮海膽・螃蟹・串烤，邊逛邊吃，最後衝刺採購生鮮。
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8D%80%E6%97%A5%E6%9C%AC%E6%A9%8B2%E4%B8%81%E7%9B%AE" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市中央區日本橋2丁目</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><h4>串かつ だるま 道頓堀店</h4><span class="meal-label">大阪必吃</span></div>
+      <div class="food-card-body">
+        大阪名物炸串，百年老店，醬汁不能沾兩次的規矩是特色，一定要試試！
+        <div class="address">📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8D%80%E9%81%93%E9%A0%93%E5%A0%801-6-4" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市中央區道頓堀1-6-4</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🛍 最後採購清單</div>
+  <div style="margin-top:10px">
+    <div class="shop-card">
+      <h4>ドン・キホーテ 難波 最後衝刺</h4>
+      <p>藥妝（小林製藥・龍角散・曼秀雷敦）、零食、玩具、戰鬥陀螺 最後補貨！</p>
+      <p class="shop-note">🪀 這是回台前最後購買戰鬥陀螺的機會！</p>
+    </div>
+    <div class="shop-card">
+      <h4>黑門市場 生鮮・醬料</h4>
+      <p>明太子、各類醬料、即食海鮮，選擇可常溫運輸的商品。注意海關禁止帶回生鮮！</p>
+    </div>
+    <div class="shop-card">
+      <h4>關西空港 免稅區</h4>
+      <p>化妝品、酒類、菸草，以及最後的零食掃貨。出境後空間充裕可細逛。</p>
+    </div>
+  </div>
+
+  <div style="background:#f0fff4;border:1px solid #9ae6b4;border-radius:12px;margin:16px;padding:14px;">
+    <div style="font-weight:800;color:#276749;font-size:15px;margin-bottom:8px">🎉 旅程完結！平安回家</div>
+    <div style="font-size:13px;color:#2f855a;line-height:1.7">
+      山陰・關西 7日行程圓滿完成！<br>
+      大阪 → 近江八幡 → 姬路 → 鳥取砂丘 → 三朝温泉 → 倉吉 → 倉敷<br>
+      全程 4 大人 2 小孩，一路平安順利 🙏
+    </div>
+  </div>
+</div>
+
+<div class="bottom-safe"></div>
+
+<script>
+function showDay(index) {
+  document.querySelectorAll('.day-panel').forEach(function(p, i) {
+    p.classList.toggle('active', i === index);
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(b, i) {
+    b.classList.toggle('active', i === index);
+  });
+  // Scroll tab into view
+  var btn = document.querySelectorAll('.tab-btn')[index];
+  if (btn) btn.scrollIntoView({block:'nearest', inline:'center'});
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
