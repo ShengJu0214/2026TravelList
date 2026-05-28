@@ -252,6 +252,18 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
     -webkit-user-select: none; user-select: none;
     outline: none;
   }
+
+  /* Shopping wish list card */
+  .shop-card { background:#fff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,.10); margin:12px 0; overflow:hidden; }
+  .shop-card-head { padding:10px 14px; font-size:14px; font-weight:800; color:#fff; background:linear-gradient(135deg,#276749,#38a169); }
+  .shop-card-body { padding:10px 14px; }
+  .shop-item { display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:1px solid #f0f0f0; }
+  .shop-item:last-child { border-bottom:none; }
+  .shop-item-icon { font-size:22px; flex-shrink:0; }
+  .shop-item-info { flex:1; }
+  .shop-item-name { font-size:13px; font-weight:700; color:#1a202c; }
+  .shop-item-sub { font-size:11px; color:#718096; margin-top:2px; line-height:1.4; }
+  .shop-item-tag { display:inline-block; margin-top:4px; padding:2px 8px; border-radius:99px; font-size:10px; font-weight:700; background:#c6f6d5; color:#276749; }
 </style>
 </head>
 <body>
@@ -506,6 +518,38 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
     <div class="beyblade-item" style="font-size:12px;color:#92400e">💡 入住難波後步行前往，營業至深夜，種類最齊全！</div>
   </div>
 
+  
+  <!-- Shopping Wishlist Day1 -->
+  <div class="shop-card">
+    <div class="shop-card-head">🛍 購物清單 — 大阪で入手！</div>
+    <div class="shop-card-body">
+      <div class="shop-item">
+        <div class="shop-item-icon">🎧</div>
+        <div class="shop-item-info">
+          <div class="shop-item-name">Bose QuietComfort Ultra 消噪耳塞（第二代）</div>
+          <div class="shop-item-sub">📍 <a href="https://maps.google.com/?q=%E3%83%93%E3%83%83%E3%82%AF%E3%82%AB%E3%83%A1%E3%83%A9+%E3%81%AA%E3%82%93%E3%81%B0+CITY+%E5%BA%97" target="_blank" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">ビックカメラ なんばCITY店</a>（難波駅直結）<br>或 <a href="https://maps.google.com/?q=%E3%83%A8%E3%83%89%E3%83%90%E3%82%B7%E3%82%AB%E3%83%A1%E3%83%A9+%E6%A2%85%E7%94%B0" target="_blank" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">ヨドバシカメラ 梅田店</a>（JR大阪駅前）<br>💡 日本購買比台灣便宜，且享免稅（稅金退還）</div>
+          <span class="shop-item-tag">🔖 必買</span>
+        </div>
+      </div>
+      <div class="shop-item">
+        <div class="shop-item-icon">🍜</div>
+        <div class="shop-item-info">
+          <div class="shop-item-name">日清 Cup Noodle ねぎ塩味（蔥鹽）</div>
+          <div class="shop-item-sub">📍 各地便利商店（7-11 / Lawson / FamilyMart）均有售<br>💡 蔥鹽口味推薦指數 ⭐⭐⭐⭐⭐，可多買幾個帶回台灣</div>
+          <span class="shop-item-tag">🔖 土産推薦</span>
+        </div>
+      </div>
+      <div class="shop-item">
+        <div class="shop-item-icon">🍊</div>
+        <div class="shop-item-info">
+          <div class="shop-item-name">ミツヤ オレンジ（三矢橘子汽水）</div>
+          <div class="shop-item-sub">📍 街角自動販賣機（自販機）限定販售<br>💡 140週年紀念款，罐裝復古設計，踏出飯店就能找到！</div>
+          <span class="shop-item-tag">🔖 自販機限定</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="section-title">📅 今日行程</div>
   <div class="timeline">
     <div class="tl-item">
@@ -557,7 +601,21 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
       <div class="tl-time">19:00</div>
       <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
       <div class="tl-body">
-        <div class="tl-title">晚餐</div>
+        
+  <!-- Recommended Restaurant Day1 -->
+  <div class="section-title">🍽 今日餐廳推薦</div>
+  <div style="background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.10);margin:8px 0;overflow:hidden;">
+    <div style="padding:10px 14px;font-size:14px;font-weight:800;color:#fff;background:linear-gradient(135deg,#9b2335,#c53030);">🥩 板前燒肉 一斗 天下茶屋本店</div>
+    <div style="padding:10px 14px;">
+      <div style="font-size:12px;color:#718096;margin-bottom:6px;">板前焼肉一斗｜⭐ 4.4（788則評論）</div>
+      <div style="font-size:13px;color:#1a202c;margin-bottom:4px;">💴 每人 ¥4,000–10,000｜🕛 營業至凌晨00:00</div>
+      <div style="font-size:12px;color:#4a5568;margin-bottom:6px;">📍 <a href="https://maps.app.goo.gl/k65E2yrtsDeACvTDA" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市西成区天下茶屋東1-23-18</a>｜天下茶屋駅 徒歩5分</div>
+      <div style="font-size:12px;color:#4a5568;margin-bottom:2px;">✅ 有中文菜單｜肉質優、上菜快、價格實惠</div>
+      <div style="font-size:12px;color:#744210;margin-top:6px;background:#fefcbf;padding:5px 8px;border-radius:6px;">💡 從難波搭南海→天下茶屋換乘時，可順路在此用晚餐再搭地鐵回飯店</div>
+    </div>
+  </div>
+
+<div class="tl-title">晚餐</div>
         <div class="tl-desc">道頓堀美食街（詳見下方餐廳推薦）</div>
         <span class="tl-tag tag-food">🍜 餐飲</span>
       </div>
@@ -1230,6 +1288,28 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
 
 
   <!-- Beyblade Day 7 -->
+  
+  <!-- Shopping reminder Day7 -->
+  <div class="shop-card" style="margin-top:4px">
+    <div class="shop-card-head" style="background:linear-gradient(135deg,#c05621,#dd6b20)">🛍 購物清單 — 最後補貨機會！</div>
+    <div class="shop-card-body">
+      <div class="shop-item">
+        <div class="shop-item-icon">🍜</div>
+        <div class="shop-item-info">
+          <div class="shop-item-name">日清 Cup Noodle ねぎ塩 ＆ ミツヤ オレンジ</div>
+          <div class="shop-item-sub">📍 難波ドン・キホーテ / 各便利商店<br>💡 如果還沒買到，今天是最後機會！</div>
+        </div>
+      </div>
+      <div class="shop-item">
+        <div class="shop-item-icon">🎧</div>
+        <div class="shop-item-info">
+          <div class="shop-item-name">Bose QuietComfort Ultra</div>
+          <div class="shop-item-sub">📍 如 Day1 未買，可至 <a href="https://maps.google.com/?q=%E3%83%93%E3%83%83%E3%82%AF%E3%82%AB%E3%83%A1%E3%83%A9+%E3%81%AA%E3%82%93%E3%81%B0" target="_blank" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">ビックカメラ なんば</a> 補購（記得帶護照享免稅）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="beyblade-card">
     <div class="beyblade-header"><span class="icon">🪀</span>戰鬥陀螺 最後補貨機會 — Day 7</div>
     <div class="beyblade-item"><strong>ドン・キホーテ 難波本店（最後機會！）</strong><br>📍 <a href="https://maps.google.com/?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E6%B5%AA%E9%80%9F%E5%8D%80%E9%9B%A3%E6%B3%A2%E4%B8%AD2-10-70%EF%BD%9C%E7%87%9F%E6%A5%AD%E8%87%B3%E6%B7%B1%E5%A4%9C" target="_blank" rel="noopener" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">大阪市浪速區難波中2-10-70｜營業至深夜</a></div>
