@@ -77,9 +77,23 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
 .section-title {
   font-size: 13px; font-weight: 700; text-transform: uppercase;
   letter-spacing: .06em; color: var(--primary);
-  padding: 16px 16px 8px; border-left: 4px solid var(--primary);
+  padding: 14px 16px 10px; border-left: 4px solid var(--primary);
   margin-left: 16px; margin-right: 16px;
   border-bottom: 1px solid var(--border);
+  cursor: pointer; user-select: none;
+  display: flex; justify-content: space-between; align-items: center;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.section-title::after {
+  content: '▾';
+  font-size: 15px; font-weight: 400;
+  transition: transform .3s ease;
+  flex-shrink: 0; margin-left: 8px;
+}
+.section-title.sec-closed::after { transform: rotate(-90deg); }
+.sec-body {
+  overflow: hidden;
+  transition: max-height .35s ease;
 }
 
 /* ── Timeline ── */
@@ -329,6 +343,17 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
 
   <!-- Sub 1: 接送 -->
   <div class="sub-panel" id="sub1">
+    <div style="background:#1a202c;border-radius:12px;margin:12px 0 8px;overflow:hidden;">
+      <div style="padding:10px 14px;background:linear-gradient(135deg,#2d3748,#4a5568);color:#fff;font-size:14px;font-weight:800;">🚗 司機資訊</div>
+      <div style="padding:12px 14px;display:flex;align-items:center;gap:14px;">
+        <div style="font-size:38px;line-height:1;">🧑‍✈️</div>
+        <div>
+          <div style="color:#f6e05e;font-size:18px;font-weight:900;letter-spacing:.05em;">明 師傅</div>
+          <div style="color:#e2e8f0;font-size:13px;margin-top:4px;">🚙 Toyota RAV4　<span style="background:#e53e3e;color:#fff;padding:2px 8px;border-radius:6px;font-weight:700;font-size:13px;">黑色</span></div>
+          <div style="color:#90cdf4;font-size:16px;font-weight:800;letter-spacing:.12em;margin-top:6px;">車牌：<span style="background:#2b6cb0;color:#fff;padding:3px 12px;border-radius:6px;">1979</span></div>
+        </div>
+      </div>
+    </div>
     <div class="info-card" style="margin-top:12px">
       <div class="info-card-head shuttle-head">🚐 接送安排</div>
       <div class="info-card-body">
@@ -836,7 +861,31 @@ body { font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
     <div class="beyblade-item" style="font-size:12px;color:#92400e">💡 抵達鳥取後可先去 AEON 超市採買，順便逛玩具区！</div>
   </div>
 
-  <div class="section-title">📅 今日行程</div>
+  
+  <!-- Luggage Storage Tip Day3 -->
+  <div style="background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.10);margin:12px 0;overflow:hidden;">
+    <div style="padding:10px 14px;font-size:14px;font-weight:800;color:#fff;background:linear-gradient(135deg,#2c5282,#3182ce);">🧳 行李寄放建議</div>
+    <div style="padding:10px 14px;font-size:12px;color:#4a5568;line-height:1.7;">
+      <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #f0f0f0;">
+        <span style="font-weight:700;color:#1a202c;">① 姫路駅 コインロッカー（最推薦）</span><br>
+        📍 <a href="https://maps.google.com/?q=姫路駅+コインロッカー" target="_blank" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">姫路駅 南北出口</a>｜大型行李箱可放入<br>
+        💴 小型 ¥300 / 中型 ¥500 / 大型 ¥700–800（一日）<br>
+        💡 抵達姫路後直接在站內寄好，輕裝遊姬路城，回站後取行李繼續搭車往鳥取
+      </div>
+      <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #f0f0f0;">
+        <span style="font-weight:700;color:#1a202c;">② ecbo cloak（備案・置物櫃滿時）</span><br>
+        📱 <a href="https://cloak.ecbo.io" target="_blank" style="color:#2b6cb0;text-decoration:none;border-bottom:1px dashed #93c5fd;">ecbo.io</a> 查詢站周邊商店寄放｜¥500–800 / 件 / 天
+      </div>
+      <div>
+        <span style="font-weight:700;color:#1a202c;">③ 宅急便（最輕鬆・需提前安排）</span><br>
+        📦 Day 2 晚上請 Eslead Hotel 代叫ヤマト運輸，把大件行李直送鳥取住所<br>
+        💴 約 ¥1,500–2,000 / 件｜⚠️ 需先向房東確認可收件<br>
+        💡 這樣 Day 3 全程只帶小包包，帶小孩遊姬路城超輕鬆！
+      </div>
+    </div>
+  </div>
+
+<div class="section-title">📅 今日行程</div>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-time">08:00</div>
@@ -1534,5 +1583,73 @@ function updateProg() {
 })();
 </script>
 
+
+<script>
+(function(){
+  function initAccordion(){
+    document.querySelectorAll('.section-title').forEach(function(title){
+      var txt = title.textContent || '';
+      // 今日行程 starts open; others start closed
+      var startOpen = txt.indexOf('今日行程') >= 0;
+
+      // Collect next siblings until next section-title (or end of parent)
+      var siblings = [];
+      var el = title.nextElementSibling;
+      while(el && !el.classList.contains('section-title') && !el.classList.contains('day-hero')){
+        siblings.push(el);
+        el = el.nextElementSibling;
+      }
+      if(!siblings.length) return;
+
+      // Wrap siblings in .sec-body
+      var wrap = document.createElement('div');
+      wrap.className = 'sec-body';
+      title.parentNode.insertBefore(wrap, siblings[0]);
+      siblings.forEach(function(s){ wrap.appendChild(s); });
+
+      // Set initial state
+      if(startOpen){
+        wrap.style.maxHeight = 'none';
+        wrap.style.overflow = 'visible';
+      } else {
+        wrap.style.maxHeight = '0';
+        title.classList.add('sec-closed');
+      }
+
+      // Toggle on click
+      title.addEventListener('click', function(){
+        var closed = title.classList.contains('sec-closed');
+        if(closed){
+          // Open
+          wrap.style.overflow = 'hidden';
+          wrap.style.maxHeight = wrap.scrollHeight + 'px';
+          title.classList.remove('sec-closed');
+          setTimeout(function(){
+            if(!title.classList.contains('sec-closed')){
+              wrap.style.maxHeight = 'none';
+              wrap.style.overflow = 'visible';
+            }
+          }, 360);
+        } else {
+          // Close — snapshot height first so transition works
+          wrap.style.overflow = 'hidden';
+          wrap.style.maxHeight = wrap.scrollHeight + 'px';
+          requestAnimationFrame(function(){
+            requestAnimationFrame(function(){
+              wrap.style.maxHeight = '0';
+              title.classList.add('sec-closed');
+            });
+          });
+        }
+      });
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initAccordion);
+  } else {
+    initAccordion();
+  }
+})();
+</script>
 </body>
 </html>
